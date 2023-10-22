@@ -59,7 +59,10 @@ public class Main {
 
 
     public static void createQRCode(Scanner scanner) throws WriterException, IOException {
-        System.out.println("Enter the url https://");
+
+        System.out.print("Enter le nom de siteweb: ");
+        String nom = scanner.nextLine();
+        System.out.print("Enter the url https://");
         String data = scanner.nextLine();
 
 
@@ -67,20 +70,36 @@ public class Main {
 
         // on peut modifier le path
 
-        String filePath = "C:\\Users\\DELL\\Documents\\s3\\Projet_JAVA\\qr_code\\src\\main\\resources\\QRcode-img\\qrcode.png";
+        String filePath = "C:\\Users\\DELL\\Documents\\s3\\Projet_JAVA\\QR_code\\src\\main\\resources\\image\\"+ nom +".png";
 
 
         BitMatrix bitMatrix = new MultiFormatWriter().encode(data, BarcodeFormat.QR_CODE, size, size);
-
+/*
+        try {
+            File file1 = new File(filePath);
+            if (file.createNewFile()) {
+                System.out.println("File created: " + file.getName());
+            } else {
+                System.out.println("File already exists.");
+            }
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }*/
 
         FileOutputStream fileOutputStream = new FileOutputStream(new File(filePath));
 
 
         MatrixToImageWriter.writeToStream(bitMatrix, "png", fileOutputStream);
-        System.out.println(fileOutputStream);
+        System.out.println(filePath);
     }
 
 
 
 }
+
+
+
+
+
 
