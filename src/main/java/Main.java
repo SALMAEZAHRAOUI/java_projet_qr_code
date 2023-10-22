@@ -20,12 +20,12 @@ public class Main {
 
         while (!exit) {
             /*voici le menu */
-            System.out.println("================Menu===============");
-            System.out.println("1. Créer un QR Code");
-            System.out.println("2. Éditer un QR Code");
-            System.out.println("3. Supprimer un QR Code");
-            System.out.println("4. Archiver les QR Codes");
-            System.out.println("0. Quitter");
+            System.out.println("***********==Menu==***********");
+            System.out.println("1) Créer un QR Code");
+            System.out.println("2) Éditer un QR Code");
+            System.out.println("3) Supprimer un QR Code");
+            System.out.println("4) Archiver les QR Codes");
+            System.out.println("0) Quitter");
             System.out.print("Choisissez une option : ");
 
             int choice = scanner.nextInt();
