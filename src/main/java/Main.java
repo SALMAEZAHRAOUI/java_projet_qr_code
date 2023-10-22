@@ -1,8 +1,10 @@
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.Scanner;
-
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
@@ -34,13 +36,13 @@ public class Main {
                     createQRCode(scanner);
                     break;
                 case 2:
-                    // editQRCode(scanner);
+                    editQRCode(scanner);
                     break;
                 case 3:
-                    // deleteQRCode(scanner);
+                    deleteQRCode(scanner);
                     break;
                 case 4:
-                    // archiveQRCodes();
+                    archiveQRCodes();
                     break;
                 case 0:
                     exit = true;
@@ -57,49 +59,71 @@ public class Main {
         scanner.close();
     }
 
-
     public static void createQRCode(Scanner scanner) throws WriterException, IOException {
-
         System.out.print("Enter le nom de siteweb: ");
         String nom = scanner.nextLine();
         System.out.print("Enter the url https://");
         String data = scanner.nextLine();
 
-
         int size = 400;
 
         // on peut modifier le path
-
-        String filePath = "C:\\Users\\DELL\\Documents\\s3\\Projet_JAVA\\java_projet_qr_code\\src\\main\\resources\\imagesQR\\"+ nom +".png";
-
+        String filePath = "src/main/resources/imagesQR" + nom + ".png";
 
         BitMatrix bitMatrix = new MultiFormatWriter().encode(data, BarcodeFormat.QR_CODE, size, size);
-/*
-        try {
-            File file1 = new File(filePath);
-            if (file.createNewFile()) {
-                System.out.println("File created: " + file.getName());
-            } else {
-                System.out.println("File already exists.");
-            }
-        } catch (IOException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
-        }*/
 
         FileOutputStream fileOutputStream = new FileOutputStream(new File(filePath));
-
 
         MatrixToImageWriter.writeToStream(bitMatrix, "png", fileOutputStream);
         System.out.println(filePath);
     }
 
+    public static void editQRCode(Scanner scanner) throws IOException {
+        System.out.print("Enter le nom du fichier à éditer: ");
+        String fileName = scanner.nextLine();
 
+        // on peut modifier le path
+        String filePath = "src/main/resources/imagesQR" + fileName;
 
-}
+        File file = new File(filePath);
+        if (!file.exists()) {
+            System.out.println("Le fichier n'existe pas.");
+            return;
+        }
 
+        System.out.print("Enter le nouveau contenu du fichier: ");
+        String newContent = scanner.nextLine();
 
+        FileOutputStream fileOutputStream = new FileOutputStream(file);
+        fileOutputStream.write(newContent.getBytes());
+        fileOutputStream.flush();
+        fileOutputStream.close();
 
+        System.out.println("Fichier modifié avec succès.");
+    }
 
+    public static void deleteQRCode(Scanner scanner) throws IOException {
+        System.out.print("Enter le nom du fichier à supprimer: ");
+        String fileName = scanner.nextLine();
 
+        // on peut modifier le path
+        String filePath = "src/main/resources/imagesQR" + fileName;
+
+        File file = new File(filePath);
+        if (!file.exists()) {
+            System.out.println("Le fichier n'existe pas.");
+            return;
+        }
+
+        if (file.delete()) {
+            System.out.println("Fichier supprimé avec succès.");
+        } else {
+            System.out.println("Impossible de supprimer le fichier.");
+        }
+    }
+
+    public static void archiveQRCodes() throws IOException {
+
+            }
+        }
 
