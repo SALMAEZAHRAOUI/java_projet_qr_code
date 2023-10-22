@@ -70,7 +70,7 @@ public class Main {
 
         // on peut modifier le path
 
-        String filePath = "C:\\Users\\DELL\\Documents\\s3\\Projet_JAVA\\QR_code\\src\\main\\resources\\image\\"+ nom +".png";
+        String filePath = "C:\\Users\\DELL\\Documents\\s3\\Projet_JAVA\\java_projet_qr_code\\src\\main\\resources\\imagesQR\\"+ nom +".png";
 
 
         BitMatrix bitMatrix = new MultiFormatWriter().encode(data, BarcodeFormat.QR_CODE, size, size);
