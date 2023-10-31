@@ -114,8 +114,17 @@ public class genarateCodeQR {
 
         if (qrCodes.containsKey(name)) {
 
-            qrCodes.remove(name);
-            System.out.println("QR Code supprimé avec succès !");
+            String filePath = "QR_code\\" + name + ".png"; // Specify the path to the file you want to delete
+
+            File file = new File(filePath);
+
+            if (file.delete()) {
+                    System.out.println("QR Code supprimé avec succès !");
+                qrCodes.remove(name);
+            } else {
+                    System.err.println("Échec de la suppression du QR Code.");
+            }
+
         } else {
             System.out.println("QR Code non trouvé.");
         }
