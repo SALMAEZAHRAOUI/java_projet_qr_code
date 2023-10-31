@@ -56,45 +56,17 @@ public class genarateCodeQR {
         return size;
     }
 
-    private void createQRCode(Scanner scanner) {
-        System.out.print("Entrez le contenu du QR Code : ");
-        setData(scanner.nextLine());
-        System.out.print("Entrez le nom du QR Code : ");
-        setName(scanner.nextLine());
+    public void createQRCode() {
 
-        qrCodes.put(getName(), getData());
+      genarateQR(getName(), getData());
 
-        generateQRCode(getData(), getName());
-        System.out.println("QR Code créé avec succès !");
-
+      System.out.println("QR Code créé avec succès !");
 
     }
-
-
-    // the methods
-    public void generateQRCode(String data, String name) {
+    // this method is for genera a code QR
+    public void genarateQR(String name , String data){
 
         String filePath = "QR_code\\" + name + ".png";
-
-        /*
-
-        FileOutputStream fileOutputStream;
-        BitMatrix bitMatrix;
-        try {
-            bitMatrix = new MultiFormatWriter().encode(getData(), BarcodeFormat.QR_CODE, getSize(), getSize());
-
-            fileOutputStream = new FileOutputStream(filePath);
-
-            MatrixToImageWriter.writeToStream(bitMatrix, "png", fileOutputStream);
-
-            fileOutputStream.close();
-
-        } catch (IOException | WriterException e) {
-            throw new RuntimeException(e);
-        }
-
-        System.out.println("Created of QR code is succefull");
-*/
 
         try {
             BitMatrix bitMatrix = new MultiFormatWriter()
@@ -108,27 +80,26 @@ public class genarateCodeQR {
                 }
             }
 
-            File outputFile = new File("QRcode"+name + "." + "png");
+            File outputFile = new File(filePath);
             ImageIO.write(image, "png", outputFile);
             System.out.println("QR Code généré : " + outputFile.getAbsolutePath());
+            qrCodes.put(getName(), outputFile.getAbsolutePath());
+
         } catch (Exception e) {
             System.out.println("Erreur lors de la génération du QR Code : " + e.getMessage());
         }
 
-
     }
-
 
     public void edit(Scanner scanner){
 
-        System.out.println("Entrez le nom du QR Code à éditer : ");
-        setName(scanner.nextLine());
+
         if (qrCodes.containsKey(getName())){
             System.out.print("Entrez le nouveau contenu du QR Code : ");
-            //String newContent = scanner.nextLine();
+
             setData(scanner.nextLine());
-            generateQRCode(getData(),getName());
-            qrCodes.put(name, getData());
+            genarateQR(getName(), getData());
+
             System.out.println("QR Code édité avec succès !");
         } else {
             System.out.println("QR Code non trouvé.");
@@ -136,21 +107,39 @@ public class genarateCodeQR {
 
 
     }
-/*
-    private void deleteQRCode(Scanner scanner) {
-        System.out.print("Entrez le nom du QR Code à supprimer : ");
-        String name = scanner.nextLine();
+
+
+    public void deleteQRCode(String name) {
+
 
         if (qrCodes.containsKey(name)) {
-            File("QRcode"+name + "." + "png");
+
             qrCodes.remove(name);
-            outputFile.delete();
             System.out.println("QR Code supprimé avec succès !");
         } else {
             System.out.println("QR Code non trouvé.");
         }
     }
-*/
+
+    public void archiveQRCodes(){
+
+        for (Map.Entry<String, String> entry : qrCodes.entrySet()) {
+
+            System.out.println(entry.getKey() + " " + entry.getValue());
+        }
+
+    }
+
+
+
+
+
+
+
+
+
+
+
 
 
 }

@@ -3,6 +3,7 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
 
+        genarateCodeQR genarateCodeQR = new genarateCodeQR("www.youtube.com","youtube");
         Scanner scanner = new Scanner(System.in);
         boolean exit = false;
         while (!exit) {
@@ -19,16 +20,30 @@ public class Main {
             scanner.nextLine(); // Consume newline character
             switch (choice) {
                 case 1:
-                    //createQRCode(scanner);
+
+                    System.out.print("Entrez le contenu du QR Code : ");
+                    genarateCodeQR.setData(scanner.nextLine());
+                    System.out.print("Entrez le nom du QR Code : ");
+                    genarateCodeQR.setName(scanner.nextLine());
+                    genarateCodeQR.createQRCode();
                     break;
                 case 2:
                     //editQRCode(scanner);
+                    System.out.print("Entrez le nom du QR Code à éditer : ");
+                    genarateCodeQR.setName(scanner.nextLine());
+                    genarateCodeQR.edit(scanner);
+
+
+
+
                     break;
                 case 3:
-                    //deleteQRCode(scanner);
+                    System.out.print("Entrez le nom du QR Code à supprimer : ");
+                    String name = scanner.nextLine();
+                    genarateCodeQR.deleteQRCode(name);
                     break;
                 case 4:
-                    //archiveQRCodes();
+                    genarateCodeQR.archiveQRCodes();
                     break;
                 case 0:
                     exit = true;
