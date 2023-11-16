@@ -56,6 +56,8 @@ public class genarateCodeQR {
         return size;
     }
 
+
+    //Create QR code
     public void createQRCode() {
 
       genarateQR(getName(), getData());
@@ -63,7 +65,7 @@ public class genarateCodeQR {
       System.out.println("QR Code créé avec succès !");
 
     }
-    // this method is for genera a code QR
+    // this method is for generate a code QR
     public void genarateQR(String name , String data){
 
         String filePath = "QR_code\\" + name + ".png";
@@ -91,8 +93,9 @@ public class genarateCodeQR {
 
     }
 
-    public void edit(Scanner scanner){
 
+    //Modify a QR code
+    public void edit(Scanner scanner){
 
         if (qrCodes.containsKey(getName())){
             System.out.print("Entrez le nouveau contenu du QR Code : ");
@@ -109,6 +112,7 @@ public class genarateCodeQR {
     }
 
 
+    //Delete a QR code
     public void deleteQRCode(String name) {
 
 
@@ -118,18 +122,23 @@ public class genarateCodeQR {
 
             File file = new File(filePath);
 
+            //delete the file exists deleted then delete the QR ccode 
             if (file.delete()) {
                     System.out.println("QR Code supprimé avec succès !");
                 qrCodes.remove(name);
-            } else {
+            }
+            else {
                     System.err.println("Échec de la suppression du QR Code.");
             }
 
-        } else {
+        } 
+        //otherwise the file does not exist
+        else {
             System.out.println("QR Code non trouvé.");
         }
     }
 
+    Archive QR codes
     public void archiveQRCodes(){
 
         for (Map.Entry<String, String> entry : qrCodes.entrySet()) {
@@ -138,17 +147,6 @@ public class genarateCodeQR {
         }
 
     }
-
-
-
-
-
-
-
-
-
-
-
 
 
 }
