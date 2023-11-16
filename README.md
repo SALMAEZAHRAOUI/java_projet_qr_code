@@ -1,10 +1,11 @@
 # Generate and Read Data from QR code ZXing
 Generate QR code and Read Data back using Java ZXing
+https://github.com/YSALMAEZAHRAOUI/java_projet_qr_code.git
 
-## ZXing
+### ZXing
 ZXing ("zebra crossing") is an open-source, multi-format 1D/2D barcode image processing library implemented i, Java, with ports to other languages.
 
-## maven dependency
+### maven dependency
 
     <!-- https://mvnrepository.com/artifact/com.google.zxing/core -->
     <dependency>
